@@ -1,4 +1,4 @@
-use cupboard;
+use recipes_app;
 db.dropDatabase();
 db.cupboard.insertMany([
     {

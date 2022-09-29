@@ -1,12 +1,23 @@
 const express = require('express');
 const app = express()
+
 const cors = require('cors');
 app.use(cors())
 
-app.get('/', function (req, res) {
-    res.json({ message: "Hello World!" })
-})
+const MongoClient = require('mongodb').MongoClient;
+const createRouter = require('./helpers/create_router.js');
+
+app.use(express.json())
+
+MongoClient.connect('mongodb://127.0.0.1:27017', { useUnifiedTopology: true })
+    .then((client) => {
+        const db = client.db('recipes_app');
+        const cupboardCollection = db.collection('cupboard');
+        const cupboardRouter = createRouter(cupboardCollection);
+        app.use('/api/cupboard', cupboardRouter);
+    })
+    .catch(console.err);
 
 app.listen(9000, function () {
-    console.log('App running on port 9000')
-})
+    console.log(`Listening on port ${this.address().port}`);
+});
