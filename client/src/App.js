@@ -1,18 +1,19 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import { getCupboard } from "./AppService"
 
 function App() {
-  const [message, setMessage] = useState('')
+  const [cupbaord, setCupboard] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:9000/')
-      .then(response => response.json())
-      .then(data => setMessage(data.message))
-  })
+    getCupboard().then((allCupboard) => {
+      setCupboard(allCupboard);
+    })
+  }, [])
 
   return (
     <>
-      <h1>The server said: {message}</h1>
+      <h1>The server said</h1>
     </>
   );
 }
