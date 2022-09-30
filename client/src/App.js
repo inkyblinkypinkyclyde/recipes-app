@@ -1,9 +1,11 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { getCupboard } from "./AppService"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CupboardContents from './components/CupboardContents';
 
 function App() {
-  const [cupbaord, setCupboard] = useState([])
+  const [cupboard, setCupboard] = useState([])
 
   useEffect(() => {
     getCupboard().then((allCupboard) => {
@@ -12,9 +14,11 @@ function App() {
   }, [])
 
   return (
-    <>
-      <h1>The server said</h1>
-    </>
+    <Router>
+      <Routes>
+        <Route exact path="/cupboardcontents" element={< CupboardContents cupboard={cupboard} />} />
+      </Routes>
+    </Router>
   );
 }
 
