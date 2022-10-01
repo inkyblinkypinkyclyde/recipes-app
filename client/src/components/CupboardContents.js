@@ -1,4 +1,5 @@
 import React from "react";
+import AddIngredientForm from "./AddIngredientForm";
 import CupboardContentsRow from "./CupboardContentsRow";
 
 
@@ -6,9 +7,9 @@ const CupboardContents = ({ cupboard }) => {
 
     const displayCupboardContents = cupboard.map((item) => {
         return (
-            <>
+            <tr key={item._id}>
                 <CupboardContentsRow item={item} />
-            </>
+            </tr>
         )
     })
 
@@ -18,14 +19,17 @@ const CupboardContents = ({ cupboard }) => {
             <h2>There are {cupboard.length} items in your cupboard</h2>
             <table>
                 <thead>
-                    <td>Name</td>
-                    <td>Superclass</td>
-                    <td>Amount</td>
+                    <tr>
+                        <td>Name</td>
+                        <td>Superclass</td>
+                        <td>Amount</td>
+                    </tr>
                 </thead>
                 <tbody>
                     {displayCupboardContents}
                 </tbody>
             </table>
+            <AddIngredientForm />
         </>
     )
 }
