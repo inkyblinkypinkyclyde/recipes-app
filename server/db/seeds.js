@@ -4,6 +4,7 @@ db.cupboard.insertMany([
     {
         name: "Sea Salt",
         superclass: "Salt",
+        type: "untracked",
         present: true
     },
     {
@@ -17,5 +18,11 @@ db.cupboard.insertMany([
         superclass: "Oil",
         type: "volume",
         quantity: "500"
+    },
+    {
+        name: "White Onion",
+        superclass: "Onion",
+        type: "integer",
+        quantity: 5
     }
 ]);
