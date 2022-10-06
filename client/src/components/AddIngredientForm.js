@@ -1,57 +1,55 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const AddIngredientForm = () => {
 
-    const [formData, setFormData] = useState({
-        name: "",
-        superclass: "",
-        quantity: 0
-    })
+const AddIngredientForm = ({ addIngredient }) => {
 
-    const onChange = (e) => {
-        const newFormData = Object.assign({}, formData);
-        newFormData[e.target.name] = e.target.value;
-        setFormData(newFormData);
-    }
-    const onSubmit = (e) => {
-        e.preventDefault();
-        // postIngredient(formData).then((data)=>{
-        //     addIngredient(data);
-        // })
-        console.log(formData)
-        // Reset the form input values
-        setFormData({
-            name: "",
-            superclass: "",
-            quantity: 0
-        });
+    const [name, setName] = useState('')
+    const [superclass, setSuperclass] = useState('')
+    const [quantity, setQuantity] = useState(0)
+
+    const handleNameChange = e => setName(e.target.value)
+    const handleSuperclassChange = e => setSuperclass(e.target.value)
+    const handleQuantityChange = e => setQuantity(e.target.value)
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        const ingredient = {
+            name,
+            superclass,
+            quantity
+        }
+        addIngredient(ingredient)
+        setName('')
+        setSuperclass('')
+        setQuantity(0)
     }
 
 
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit} id="ingredients-form">
+                <h2>Add an ingredient:</h2>
                 Item name:<input
                     type="text"
-                    onChange={onChange}
+                    onChange={handleNameChange}
                     name="name"
                     id="name"
-                    value={formData.name}
+                    value={name}
                 ></input><p />
                 Is a type of: <input
                     type="text"
-                    onChange={onChange}
+                    onChange={handleSuperclassChange}
                     name="superclass"
                     id="superclass"
-                    value={formData.superclass}
+                    value={superclass}
                 ></input><p />
                 Quantity: <input
                     type="number"
-                    onChange={onChange}
+                    onChange={handleQuantityChange}
                     name="quantity"
                     id="quantity"
-                    value={formData.quantity}
+                    value={quantity}
                 ></input><p />
                 <input type="submit" value="save" id="save"></input>
             </form>

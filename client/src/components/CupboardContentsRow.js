@@ -19,6 +19,10 @@ const CupboardContentsRow = ({ item }) => {
                 return (
                     <td>{item.quantity}ml</td>
                 )
+            default:
+                return (
+                    <td>error</td>
+                )
         }
     }
 

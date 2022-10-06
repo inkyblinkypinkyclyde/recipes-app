@@ -3,15 +3,17 @@ import AddIngredientForm from "./AddIngredientForm";
 import CupboardContentsRow from "./CupboardContentsRow";
 
 
-const CupboardContents = ({ cupboard }) => {
+const CupboardContents = ({ cupboard, addIngredient }) => {
 
-    const displayCupboardContents = cupboard.map((item) => {
+    const displayCupboardContents = cupboard.map((item, index) => {
         return (
-            <tr key={item._id}>
+            <tr key={index}>
                 <CupboardContentsRow item={item} />
             </tr>
         )
     })
+
+
 
     return (
         <>
@@ -29,7 +31,7 @@ const CupboardContents = ({ cupboard }) => {
                     {displayCupboardContents}
                 </tbody>
             </table>
-            <AddIngredientForm />
+            <AddIngredientForm addIngredient={addIngredient} />
         </>
     )
 }
