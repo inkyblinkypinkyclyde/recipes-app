@@ -3,25 +3,34 @@ import React, { useState } from "react";
 
 const AddIngredientForm = ({ addIngredient }) => {
 
-    const [name, setName] = useState('')
+    const [itemName, setItemName] = useState('')
     const [superclass, setSuperclass] = useState('')
     const [quantity, setQuantity] = useState(0)
+    const [type, setType] = useState('untracked')
+    const [present, setPresent] = useState(true)
 
-    const handleNameChange = e => setName(e.target.value)
+
+
+    const handleNameChange = e => setItemName(e.target.value)
     const handleSuperclassChange = e => setSuperclass(e.target.value)
     const handleQuantityChange = e => setQuantity(e.target.value)
-
+    const handleTypeChange = e => setType(e.target.value)
     const handleSubmit = event => {
         event.preventDefault()
         const ingredient = {
-            name,
+            itemName,
             superclass,
-            quantity
+            quantity,
+            type,
+            present
         }
+        console.log(ingredient)
         addIngredient(ingredient)
-        setName('')
+        setItemName('')
         setSuperclass('')
         setQuantity(0)
+        setType('untracked')
+        setPresent(true)
     }
 
 
@@ -33,9 +42,9 @@ const AddIngredientForm = ({ addIngredient }) => {
                 Item name:<input
                     type="text"
                     onChange={handleNameChange}
-                    name="name"
-                    id="name"
-                    value={name}
+                    name="item-name"
+                    id="item-name"
+                    value={itemName}
                 ></input><p />
                 Is a type of: <input
                     type="text"
@@ -44,6 +53,11 @@ const AddIngredientForm = ({ addIngredient }) => {
                     id="superclass"
                     value={superclass}
                 ></input><p />
+                <div></div>
+                Track volume or weight?
+                <input type="radio" value="volume" name="type" onChange={handleTypeChange} /> Wet
+                <input type="radio" value="weight" name="type" onChange={handleTypeChange} /> Dry
+                <p />
                 Quantity: <input
                     type="number"
                     onChange={handleQuantityChange}

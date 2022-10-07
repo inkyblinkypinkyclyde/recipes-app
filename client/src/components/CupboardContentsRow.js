@@ -28,7 +28,7 @@ const CupboardContentsRow = ({ item }) => {
 
     return (
         <>
-            <td>{item.name}</td>
+            <td>{item.itemName}</td>
             <td>{item.superclass}</td>
             {nomenaDisplay(item)}
         </>
