@@ -1,7 +1,17 @@
 import React from "react";
 import AddIngredientForm from "./AddIngredientForm";
 import CupboardContentsRow from "./CupboardContentsRow";
+import styled from 'styled-components';
 
+const GridBox = styled.div`
+display: grid;
+grid-template-columns: 2fr 1fr;
+`
+
+const StyledTable = styled.table`
+border: 1px solid black;
+width: 100%;
+`
 
 const CupboardContents = ({ cupboard, addIngredient }) => {
 
@@ -17,21 +27,27 @@ const CupboardContents = ({ cupboard, addIngredient }) => {
 
     return (
         <>
-            <h1>I am CupboardContents</h1>
-            <h2>There are {cupboard.length} items in your cupboard</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Superclass</td>
-                        <td>Amount</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {displayCupboardContents}
-                </tbody>
-            </table>
-            <AddIngredientForm addIngredient={addIngredient} />
+            <h1>Cupboard contents</h1>
+            <GridBox>
+                <div>
+                    <h2>There are {cupboard.length} items in your cupboard</h2>
+                    <StyledTable>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Superclass</td>
+                                <td>Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {displayCupboardContents}
+                        </tbody>
+                    </StyledTable>
+                </div>
+                <div>
+                    <AddIngredientForm addIngredient={addIngredient} />
+                </div>
+            </GridBox>
         </>
     )
 }
