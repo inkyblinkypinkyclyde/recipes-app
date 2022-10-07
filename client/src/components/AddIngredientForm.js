@@ -6,10 +6,8 @@ const AddIngredientForm = ({ addIngredient }) => {
     const [itemName, setItemName] = useState('')
     const [superclass, setSuperclass] = useState('')
     const [quantity, setQuantity] = useState(0)
-    const [type, setType] = useState('untracked')
+    const [type, setType] = useState('')
     const [present, setPresent] = useState(true)
-
-
 
     const handleNameChange = e => setItemName(e.target.value)
     const handleSuperclassChange = e => setSuperclass(e.target.value)
@@ -29,8 +27,23 @@ const AddIngredientForm = ({ addIngredient }) => {
         setItemName('')
         setSuperclass('')
         setQuantity(0)
-        setType('untracked')
+        setType('')
         setPresent(true)
+    }
+
+    const trackQuantity = () => {
+        return (
+            <>
+                Quantity: <input
+                    type="number"
+                    onChange={handleQuantityChange}
+                    name="quantity"
+                    id="quantity"
+                    value={quantity}
+                ></input>
+            </>
+        )
+
     }
 
 
@@ -54,17 +67,43 @@ const AddIngredientForm = ({ addIngredient }) => {
                     value={superclass}
                 ></input><p />
                 <div></div>
-                Track volume or weight?
-                <input type="radio" value="volume" name="type" onChange={handleTypeChange} /> Wet
-                <input type="radio" value="weight" name="type" onChange={handleTypeChange} /> Dry
+                Track this by:
                 <p />
-                Quantity: <input
-                    type="number"
-                    onChange={handleQuantityChange}
-                    name="quantity"
-                    id="quantity"
-                    value={quantity}
-                ></input><p />
+                <input
+                    type="radio"
+                    value="volume"
+                    name="type"
+                    checked={type === "volume"}
+                    onChange={handleTypeChange}
+                /> Volume
+                <p />
+                <input
+                    type="radio"
+                    value="weight"
+                    name="type"
+                    checked={type === "weight"}
+                    onChange={handleTypeChange}
+                /> Weight
+                <p />
+                <input
+                    type="radio"
+                    value="integer"
+                    name="type"
+                    checked={type === "integer"}
+                    onChange={handleTypeChange}
+                /> Quantity
+                <p />
+                <input
+                    type="radio"
+                    value="untracked"
+                    name="type"
+                    checked={type === "untracked"}
+                    defaultChecked
+                    onChange={handleTypeChange}
+                /> Neither
+                <p />
+                {type === "" ? null : trackQuantity()}
+                <p />
                 <input type="submit" value="save" id="save"></input>
             </form>
         </>

@@ -9,7 +9,6 @@ grid-template-columns: 2fr 1fr;
 `
 
 const StyledTable = styled.table`
-border: 1px solid black;
 width: 100%;
 `
 
