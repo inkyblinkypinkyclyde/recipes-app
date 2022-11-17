@@ -1,7 +1,13 @@
 const baseCupboardURL = 'http://localhost:9000/api/cupboard'
+const baseRecipesURL = 'http://localhost:9000/api/recipes'
 
 export const getCupboard = () => {
     return fetch(baseCupboardURL)
+        .then(res => res.json())
+}
+
+export const getRecipes = () => {
+    return fetch(baseRecipesURL)
         .then(res => res.json())
 }
 

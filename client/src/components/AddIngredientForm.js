@@ -14,6 +14,9 @@ const AddIngredientForm = ({ addIngredient }) => {
     const handleQuantityChange = e => setQuantity(e.target.value)
     const handleTypeChange = e => setType(e.target.value)
     const handleSubmit = event => {
+        console.log(type)
+        type ? setType(type) : setType("untracked") // find out why this doesn't work
+        console.log(type)
         event.preventDefault()
         const ingredient = {
             itemName,
@@ -53,6 +56,7 @@ const AddIngredientForm = ({ addIngredient }) => {
             <form onSubmit={handleSubmit} id="ingredients-form">
                 <h2>Add an ingredient:</h2>
                 Item name:<input
+                    required
                     type="text"
                     onChange={handleNameChange}
                     name="item-name"
@@ -75,7 +79,7 @@ const AddIngredientForm = ({ addIngredient }) => {
                     name="type"
                     checked={type === "volume"}
                     onChange={handleTypeChange}
-                /> Volume
+                /> Volume (ml)
                 <p />
                 <input
                     type="radio"
@@ -83,7 +87,7 @@ const AddIngredientForm = ({ addIngredient }) => {
                     name="type"
                     checked={type === "weight"}
                     onChange={handleTypeChange}
-                /> Weight
+                /> Weight (g/kg)
                 <p />
                 <input
                     type="radio"
@@ -98,7 +102,6 @@ const AddIngredientForm = ({ addIngredient }) => {
                     value="untracked"
                     name="type"
                     checked={type === "untracked"}
-                    defaultChecked
                     onChange={handleTypeChange}
                 /> Neither
                 <p />
